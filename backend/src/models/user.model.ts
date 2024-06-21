@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcryptjs from "bcryptjs";
 
 export type UserType = {
   _id: string;
@@ -33,5 +34,12 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+userSchema.pre("save", function (next) {
+  if (this.isModified("password")) {
+    this.password = bcryptjs.hashSync(this.password, 10);
+  }
+  next();
+});
 
 export const User = mongoose.model<UserType>("User", userSchema);
