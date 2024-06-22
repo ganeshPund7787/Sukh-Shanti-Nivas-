@@ -2,12 +2,18 @@ import { NextFunction, Request, Response } from "express";
 import { User } from "../models/user.model";
 import { errorHandler } from "../utils/error.Handler";
 import jwt from "jsonwebtoken";
+import { validationResult } from "express-validator";
+import bcryptjs from "bcryptjs";
 
 export const userRegister = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(400).json({ success: false, message: error.array() });
+  }
   try {
     const isUserExist = await User.findOne({ email: req.body.email });
 
@@ -37,5 +43,52 @@ export const userRegister = async (
   } catch (error: any) {
     next(error);
     console.log(`Error while register user ${error.message}`);
+  }
+};
+
+export const userLogin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      message: errors.array(),
+    });
+  }
+  try {
+    const { email, password } = req.body;
+    const isUserExist = await User.findOne({ email });
+    if (!isUserExist) return next(errorHandler(400, "User is not exist"));
+
+    const validPassword = bcryptjs.compare(password, isUserExist.password);
+
+    if (!validPassword) {
+      return next(errorHandler(401, "incorrect email & password"));
+    }
+
+    const cookie = jwt.sign(
+      { _id: isUserExist.id },
+      process.env.JWT_SECREATE_KEY as string,
+      {
+        expiresIn: "1d",
+      }
+    );
+
+    res
+      .cookie("cookie", cookie, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 86400000,
+      })
+      .status(200)
+      .json({
+        userId: isUserExist._id,
+      });
+  } catch (error: any) {
+    next(error);
+    console.log(`Error while login ${error.message}`);
   }
 };
