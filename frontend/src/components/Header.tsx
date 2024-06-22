@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="bg-purple-600 py-4">
-      <div className="container mx-auto flex justify-between">
+    <div className="bg-purple-600 py-4 px-5">
+      <div className="container mx-auto px-5 flex justify-between">
         <span className="text-2xl text-white font-bold tracking-tight">
           <Link to={"/"}>SukhShantiNivas.com</Link>
         </span>
