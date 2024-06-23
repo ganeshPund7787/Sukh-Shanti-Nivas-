@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 import { check } from "express-validator";
-import { userLogin } from "../controllers/user.controller";
+import { userLogin, validateToken } from "../controllers/user.controller";
+import { isAuthenticated } from "../middleware/Auth";
 
 const router = express.Router();
 
@@ -15,4 +16,5 @@ router.post(
   userLogin
 );
 
+router.get("/validate-token", isAuthenticated, validateToken);
 export default router;

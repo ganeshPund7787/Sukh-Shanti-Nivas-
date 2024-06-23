@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import userRouter from "./routes/user.routes";
 import authRouter from "./routes/auth.routes";
 import { errorMiddleware } from "./middleware/error.middleware";
+import cookieParser from "cookie-parser";
 
 mongoose
   .connect(process.env.MONGO_URI as string, { dbName: "User" })
@@ -13,9 +14,15 @@ mongoose
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);

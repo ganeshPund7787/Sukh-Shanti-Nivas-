@@ -94,3 +94,15 @@ export const userLogin = async (
     console.log(`Error while login ${error.message}`);
   }
 };
+
+export const validateToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.status(200).send({ _id: req._id });
+  } catch (error: any) {
+    next(error);
+  }
+};

@@ -23,8 +23,6 @@ export const AppContextProvider = ({
         showToast: (toastMessage) => {
           if (toastMessage.type === "SUCCESS") {
             toast.success(toastMessage.message);
-          } else {
-            toast.error(toastMessage.message);
           }
         },
       }}

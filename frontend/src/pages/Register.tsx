@@ -25,7 +25,7 @@ const Register = () => {
   const mutation = useMutation(registerUser, {
     onSuccess: () => {
       console.log("Registration successful, navigating to home.");
-      showToast({ message: "User ok", type: "SUCCESS" });
+      showToast({ message: "User Register successfully", type: "SUCCESS" });
       navigate("/");
     },
     onError: (error: Error) => {
