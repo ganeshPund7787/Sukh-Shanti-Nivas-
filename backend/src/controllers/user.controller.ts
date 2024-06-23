@@ -16,7 +16,6 @@ export const userRegister = async (
   }
   try {
     const isUserExist = await User.findOne({ email: req.body.email });
-
     if (isUserExist) {
       return next(errorHandler(400, "User already exist"));
     }
@@ -39,7 +38,10 @@ export const userRegister = async (
         maxAge: 86400000,
       })
       .status(200)
-      .json("ok");
+      .json({
+        success: true,
+        message: "User register successfully",
+      });
   } catch (error: any) {
     next(error);
     console.log(`Error while register user ${error.message}`);
