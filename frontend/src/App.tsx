@@ -1,10 +1,12 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./layouts/layout";
 import Register from "./pages/Register";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Toaster />
       <Routes>
         <Route
           path="/"
@@ -26,7 +28,7 @@ const App = () => {
           path="/register"
           element={
             <Layout>
-                <Register />
+              <Register />
             </Layout>
           }
         />

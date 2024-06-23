@@ -1,4 +1,5 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
+import toast from "react-hot-toast";
 
 type ToastMessage = {
   message: string;
@@ -19,10 +20,20 @@ export const AppContextProvider = ({
   return (
     <AppContext.Provider
       value={{
-        showToast: () => undefined,
+        showToast: (toastMessage) => {
+          if (toastMessage.type === "SUCCESS") {
+            toast.success(toastMessage.message);
+          } else {
+            toast.error(toastMessage.message);
+          }
+        },
       }}
     >
       {children}
     </AppContext.Provider>
   );
+};
+
+export const useAppContext = () => {
+  return useContext(AppContext) as AppContext;
 };
