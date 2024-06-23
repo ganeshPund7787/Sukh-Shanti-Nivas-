@@ -95,14 +95,5 @@ export const userLogin = async (
   }
 };
 
-export const validateToken = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    res.status(200).send({ _id: req._id });
-  } catch (error: any) {
-    next(error);
-  }
-};
+
+

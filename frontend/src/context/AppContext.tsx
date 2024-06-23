@@ -1,5 +1,7 @@
 import { createContext, useContext } from "react";
 import toast from "react-hot-toast";
+import { useQuery } from "react-query";
+import { validateToken } from "../API_Calls/isLoggedIn";
 
 type ToastMessage = {
   message: string;
@@ -8,6 +10,7 @@ type ToastMessage = {
 
 type AppContext = {
   showToast: (toastMessage: ToastMessage) => void;
+  isLoggedIn: boolean;
 };
 
 const AppContext = createContext<AppContext | undefined>(undefined);
@@ -17,6 +20,10 @@ export const AppContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const { isError } = useQuery("validateToken", validateToken, {
+    retry: false,
+  });
+
   return (
     <AppContext.Provider
       value={{
@@ -25,6 +32,7 @@ export const AppContextProvider = ({
             toast.success(toastMessage.message);
           }
         },
+        isLoggedIn: !isError,
       }}
     >
       {children}
