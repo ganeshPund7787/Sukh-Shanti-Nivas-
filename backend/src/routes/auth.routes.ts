@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response, Router } from "express";
 import { check } from "express-validator";
-import { userLogin } from "../controllers/user.controller";
+import { logOutUser, userLogin } from "../controllers/user.controller";
 import { isAuthenticated } from "../middleware/Auth";
 
 const router = express.Router();
@@ -27,4 +27,6 @@ router.get(
     }
   }
 );
+
+router.post("/logout", logOutUser);
 export default router;

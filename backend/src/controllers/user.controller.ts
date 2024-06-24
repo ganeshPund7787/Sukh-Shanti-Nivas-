@@ -95,5 +95,13 @@ export const userLogin = async (
   }
 };
 
-
-
+export const logOutUser = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res
+      .status(200)
+      .clearCookie("cookie")
+      .json({ success: true, message: "User logout successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
