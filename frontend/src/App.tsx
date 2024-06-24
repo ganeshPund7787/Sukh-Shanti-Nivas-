@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./layouts/layout";
 import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
+import SignIn from "./pages/SignIn";
 
 const App = () => {
   return (
@@ -29,6 +30,14 @@ const App = () => {
           element={
             <Layout>
               <Register />
+            </Layout>
+          }
+        />
+        <Route
+          path="/sign-in"
+          element={
+            <Layout>
+              <SignIn />
             </Layout>
           }
         />
