@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { registerUser } from "../API_Calls/register";
 import { useAppContext } from "../context/AppContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export type RegisterFormData = {
   firstName: string;
@@ -24,7 +24,7 @@ const Register = () => {
   } = useForm<RegisterFormData>();
 
   const mutation = useMutation(registerUser, {
-    onSuccess: async() => {
+    onSuccess: async () => {
       showToast({ message: "User Register successfully", type: "SUCCESS" });
       await queryClient.invalidateQueries("validateToken");
       navigate("/");
@@ -33,8 +33,6 @@ const Register = () => {
       console.log(`Error: ${error}`);
     },
   });
-
-  // const mutation = useMutation(registerUser);
 
   const onSubmit = handleSubmit((data) => {
     mutation.mutate(data);
@@ -119,6 +117,12 @@ const Register = () => {
           <span className="text-red-500">{errors.confirmPassword.message}</span>
         )}
       </label>
+      <span className="text-sm">
+        Already Register{" "}
+        <Link to={"/sign-in"} className="text-blue-600">
+          sign-in here
+        </Link>
+      </span>
       <span>
         <button
           type="submit"
