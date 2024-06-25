@@ -6,6 +6,7 @@ import userRouter from "./routes/user.routes";
 import authRouter from "./routes/auth.routes";
 import { errorMiddleware } from "./middleware/error.middleware";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 mongoose
   .connect(process.env.MONGO_URI as string, { dbName: "User" })
@@ -23,6 +24,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist"))); 
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
