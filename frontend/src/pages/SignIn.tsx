@@ -61,8 +61,8 @@ const SignIn = () => {
         )}
       </label>
       <span className="text-sm">
-        Not Register{" "}
-        <Link to={"/register"} className="text-blue-600">
+        Not Register ?{" "}
+        <Link to={"/register"} className="text-blue-600 underline">
           create a account here
         </Link>
       </span>

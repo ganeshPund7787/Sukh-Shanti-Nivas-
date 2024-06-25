@@ -14,9 +14,10 @@ export const SignInUser = async (formdata: SignInFormData) => {
       body: JSON.stringify(formdata),
     });
     const data = await res.json();
-
+    console.log(data);
     if (!res.ok) {
-      throw new Error(data.message);
+      toast.error("error while login");
+      return
     }
     toast.success("User login successfully");
     return data;

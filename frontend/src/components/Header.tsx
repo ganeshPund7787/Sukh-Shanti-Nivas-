@@ -20,7 +20,7 @@ const Header = () => {
                   className="flex items-center text-white py-1 px-3 font-bold hover:bg-purple-400"
                   to={"/my-hotels"}
                 >
-                  Mt Hotels
+                  My Hotels
                 </Link>
                 <Link
                   className="flex items-center text-white py-1 px-3 font-bold hover:bg-purple-400"
