@@ -65,8 +65,8 @@ export const userLogin = async (
     const isUserExist = await User.findOne({ email });
     if (!isUserExist) return next(errorHandler(400, "User is not exist"));
 
-    const validPassword = bcryptjs.compare(password, isUserExist.password);
-
+    const validPassword = bcryptjs.compareSync(password, isUserExist.password);
+    console.log(validPassword);
     if (!validPassword) {
       return next(errorHandler(401, "incorrect email & password"));
     }
