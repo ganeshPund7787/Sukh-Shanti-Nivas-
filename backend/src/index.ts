@@ -9,9 +9,7 @@ import cookieParser from "cookie-parser";
 
 mongoose
   .connect(process.env.MONGO_URI as string, { dbName: "User" })
-  .then(() =>
-    console.log(`Databse connected successfully`)
-  )
+  .then(() => console.log(`Databse connected successfully`))
   .catch((err) => console.log(`Error While database connection ${err}`));
 
 const app = express();

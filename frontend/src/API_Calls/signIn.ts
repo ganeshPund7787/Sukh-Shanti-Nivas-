@@ -16,8 +16,8 @@ export const SignInUser = async (formdata: SignInFormData) => {
     const data = await res.json();
     console.log(data);
     if (!res.ok) {
-      toast.error("error while login");
-      return
+      toast.error(data.message);
+      return;
     }
     toast.success("User login successfully");
     return data;

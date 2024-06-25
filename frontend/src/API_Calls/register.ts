@@ -16,12 +16,12 @@ export const registerUser = async (formData: RegisterFormData) => {
 
     const data = await res.json();
 
-    if (!res.ok) {
-      const errorMessage =
-        data.message[0]?.msg || data.message || "Registration failed";
-      toast.error(errorMessage);
-      throw new Error(errorMessage);
-    }
+    // if (!res.ok) {
+    //   const errorMessage =
+    //     data.message[0]?.msg || data.message || "Registration failed";
+    //   toast.error(errorMessage);
+    //   throw new Error(errorMessage);
+    // }
 
     if (!data.success) {
       const errorMessage =

@@ -118,7 +118,7 @@ const Register = () => {
         )}
       </label>
       <span className="text-sm">
-        Already Register ? {" "}
+        Already Register ?{" "}
         <Link to={"/sign-in"} className="text-blue-600 underline">
           sign-in here
         </Link>
