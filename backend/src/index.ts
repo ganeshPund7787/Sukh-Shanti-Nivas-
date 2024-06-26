@@ -21,11 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
-    credentials: true,
+    credentials: true
   })
 );
 
-app.use(express.static(path.join(__dirname, "../../frontend/dist"))); 
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);

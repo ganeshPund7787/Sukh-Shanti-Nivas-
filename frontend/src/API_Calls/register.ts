@@ -1,7 +1,6 @@
 import toast from "react-hot-toast";
 import { RegisterFormData } from "../pages/Register";
-
-const API_URL = import.meta.env.VITE_API_BASE_URL ||  "";
+import { API_URL } from "../main";
 
 export const registerUser = async (formData: RegisterFormData) => {
   try {

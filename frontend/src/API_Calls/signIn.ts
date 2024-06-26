@@ -1,7 +1,6 @@
 import toast from "react-hot-toast";
 import { SignInFormData } from "../pages/SignIn";
-
-const API_URL = import.meta.env.VITE_API_BASE_URL || "";
+import { API_URL } from "../main";
 
 export const SignInUser = async (formdata: SignInFormData) => {
   try {
@@ -14,7 +13,7 @@ export const SignInUser = async (formdata: SignInFormData) => {
       body: JSON.stringify(formdata),
     });
     const data = await res.json();
-    console.log(data);
+
     if (!res.ok) {
       toast.error(data.message);
       return;

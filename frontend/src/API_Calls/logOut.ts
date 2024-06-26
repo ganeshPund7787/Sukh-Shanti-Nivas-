@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 
-const API_URL = import.meta.env.VITE_API_BASE_URL || "";
+import { API_URL } from "../main";
 
 export const logoutUser = async () => {
   const res = await fetch(`${API_URL}/api/auth/logout`, {
