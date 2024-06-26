@@ -1,6 +1,5 @@
 import { API_URL } from "../main";
 
-
 export const validateToken = async () => {
   const res = await fetch(`${API_URL}/api/auth/validate-token`, {
     method: "GET",
@@ -11,7 +10,7 @@ export const validateToken = async () => {
   });
 
   const data = await res.json();
-
+  console.log("data", data);
   if (!res.ok) {
     throw new Error("Token validation failed");
   }

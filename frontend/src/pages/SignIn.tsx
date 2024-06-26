@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { SignInUser } from "../API_Calls/signIn";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 export type SignInFormData = {
   email: string;
@@ -19,7 +20,7 @@ const SignIn = () => {
   const mutation = useMutation(SignInUser, {
     onSuccess: async () => {
       await queryClient.invalidateQueries("validateToken");
-      navigate("/");
+      return navigate("/");
     },
     onError: (err: Error) => {
       console.log(`Error while mutaion login : ${err}`);
@@ -30,7 +31,7 @@ const SignIn = () => {
     mutation.mutate(data);
   });
   return (
-    <form className="flex flex-col gap-5" onSubmit={onSubmit}>
+    <form className="flex flex-col mx-10 gap-5" onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold">Sign In</h2>
       <label htmlFor="" className="text-sm text-gray-700 flex-1">
         Email
@@ -66,7 +67,7 @@ const SignIn = () => {
           create a account here
         </Link>
       </span>
-      <span>
+      <span className="flex flex-col gap-5 md:w-96 w-[80vw] ">
         <button
           type="submit"
           disabled={false}
@@ -74,6 +75,7 @@ const SignIn = () => {
         >
           Login
         </button>
+        <OAuth />
       </span>
     </form>
   );

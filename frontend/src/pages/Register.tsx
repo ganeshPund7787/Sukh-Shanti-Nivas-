@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { registerUser } from "../API_Calls/register";
 import { useAppContext } from "../context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 export type RegisterFormData = {
   firstName: string;
@@ -123,15 +124,17 @@ const Register = () => {
           sign-in here
         </Link>
       </span>
-      <span>
+      <span className="flex gap-5 md:w-96 w-[80vw] flex-col">
         <button
           type="submit"
           disabled={false}
-          className="bg-purple-600 hover:bg-purple-500 text-white p-2 font-bold text-xl disabled:cursor-not-allowed"
+          className="bg-purple-600  hover:bg-purple-500 text-white p-2 font-bold text-xl disabled:cursor-not-allowed"
         >
           Create Account
         </button>
+        <OAuth />
       </span>
+      <div className=""></div>
     </form>
   );
 };
