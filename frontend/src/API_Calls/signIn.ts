@@ -6,12 +6,12 @@ export const SignInUser = async (formdata: SignInFormData) => {
   try {
     const res = await fetch(`${API_URL}/api/auth/login`, {
       method: "POST",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formdata),
     });
+    console.log(res);
     const data = await res.json();
     console.log(data);
     if (!res.ok) {

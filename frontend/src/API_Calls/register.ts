@@ -12,7 +12,7 @@ export const registerUser = async (formData: RegisterFormData) => {
       },
       body: JSON.stringify(formData),
     });
-
+    console.log(res);
     const data = await res.json();
     console.log(data);
     // if (!res.ok) {
