@@ -13,7 +13,7 @@ export const SignInUser = async (formdata: SignInFormData) => {
       body: JSON.stringify(formdata),
     });
     const data = await res.json();
-
+    console.log("Sign in data: ", data);
     if (!res.ok) {
       toast.error(data.message);
       return;
