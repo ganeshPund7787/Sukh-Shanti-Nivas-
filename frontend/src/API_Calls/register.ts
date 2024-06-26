@@ -6,6 +6,7 @@ export const registerUser = async (formData: RegisterFormData) => {
   try {
     const res = await fetch(`${API_URL}/api/user/register`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -13,7 +14,7 @@ export const registerUser = async (formData: RegisterFormData) => {
     });
 
     const data = await res.json();
-    console.log(`Register data`, data);
+    
     // if (!res.ok) {
     //   const errorMessage =
     //     data.message[0]?.msg || data.message || "Registration failed";

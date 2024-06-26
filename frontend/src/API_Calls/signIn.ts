@@ -6,13 +6,14 @@ export const SignInUser = async (formdata: SignInFormData) => {
   try {
     const res = await fetch(`${API_URL}/api/auth/login`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formdata),
     });
     const data = await res.json();
-    console.log("Sign in data: ", data);
+
     if (!res.ok) {
       toast.error(data.message);
       return;
