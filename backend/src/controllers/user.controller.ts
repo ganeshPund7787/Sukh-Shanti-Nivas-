@@ -66,17 +66,14 @@ export const userLogin = async (
     if (!isUserExist) return next(errorHandler(400, "User is not exist"));
 
     const validPassword = bcryptjs.compareSync(password, isUserExist.password);
-    console.log(validPassword);
+    
     if (!validPassword) {
       return next(errorHandler(401, "incorrect email & password"));
     }
 
     const cookie = jwt.sign(
       { _id: isUserExist.id },
-      process.env.JWT_SECREATE_KEY as string,
-      {
-        expiresIn: "1d",
-      }
+      process.env.JWT_SECREATE_KEY as string
     );
 
     res
