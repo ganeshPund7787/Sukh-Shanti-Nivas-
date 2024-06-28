@@ -4,6 +4,7 @@ import cloudinary from "cloudinary";
 import { Hotel, Hoteltype } from "../models/hotel.model";
 import { isAuthenticated } from "../middleware/Auth";
 import { body } from "express-validator";
+import { getMyHotel } from "../controllers/hotel.controller";
 
 const router = express.Router();
 
@@ -63,5 +64,7 @@ router.post(
     }
   }
 );
+
+router.get("/", isAuthenticated, getMyHotel);
 
 export default router;
