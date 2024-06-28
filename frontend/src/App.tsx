@@ -3,6 +3,8 @@ import Layout from "./layouts/layout";
 import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
 import SignIn from "./pages/SignIn";
+import ProtectRoute from "./components/ProtectRoute";
+import AddHotel from "./pages/AddHotel";
 
 const App = () => {
   return (
@@ -41,6 +43,16 @@ const App = () => {
             </Layout>
           }
         />
+        <Route element={<ProtectRoute />}>
+          <Route
+            path="/add-hotel"
+            element={
+              <Layout>
+                <AddHotel />
+              </Layout>
+            }
+          />
+        </Route>
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </BrowserRouter>

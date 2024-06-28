@@ -9,9 +9,10 @@ export const SignInUser = async (formdata: SignInFormData) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(formdata),
     });
-    
+
     const data = await res.json();
 
     console.log(data);
