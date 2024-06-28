@@ -74,13 +74,15 @@ const DetailsSection = () => {
         Start Rating
         <select
           {...register("starRating", { required: "Required" })}
-          className="border rounded w-full text-gray-700 font-normal"
+          className="border rounded w-full py-2 text-gray-700 font-normal"
         >
-          <option value="" className="text-sm font-bold">
+          <option value="" className="text-sm  font-bold">
             Select as Rating
           </option>
           {[1, 2, 3, 4, 5].map((num) => (
-            <option value={num}>{num}</option>
+            <option key={num} value={num}>
+              {num}
+            </option>
           ))}
         </select>
         {errors.starRating && (
