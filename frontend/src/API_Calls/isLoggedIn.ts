@@ -10,7 +10,7 @@ export const validateToken = async () => {
   });
 
   const data = await res.json();
-  console.log("data", data);
+  
   if (!res.ok) {
     throw new Error("Token validation failed");
   }
