@@ -3,9 +3,10 @@ import { API_URL } from "../main";
 
 const OAuth = async () => {
   try {
-      const res = await fetch(`${API_URL}/api/auth/googleAuth`, {
-        method
+    const res = await fetch(`${API_URL}/api/auth/googleAuth`, {
+      method: "POST",
     });
+    console.log(res);
   } catch (error: any) {
     toast.error(error.message);
     console.log(`Erorr while OAuth : ${error.message}`);
