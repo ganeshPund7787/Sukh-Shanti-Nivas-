@@ -8,7 +8,7 @@ const OAuth = () => {
     const auth = getAuth(app);
     const result = await signInWithPopup(auth, Provider);
     const user = result.user;
-    
+    console.log(user);
   };
 
   return (
