@@ -13,3 +13,21 @@ export const getMyHotel = async (
     next(error);
   }
 };
+
+export const updateHotel = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const id = req.params.id.toString();
+    const hotel = await Hotel.find({
+      _id: id,
+      userId: req._id,
+    });
+    return res.json(hotel);
+  } catch (error) {
+    next(error);
+    console.log(`Error while updateHotel : `, error);
+  }
+};
