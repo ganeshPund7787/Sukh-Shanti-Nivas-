@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import SignIn from "./pages/SignIn";
 import ProtectRoute from "./components/ProtectRoute";
 import AddHotel from "./pages/AddHotel";
+import MyHotels from "./pages/MyHotels";
 
 const App = () => {
   return (
@@ -49,6 +50,15 @@ const App = () => {
             element={
               <Layout>
                 <AddHotel />
+              </Layout>
+            }
+          />
+
+          <Route
+            path="/my-hotels"
+            element={
+              <Layout>
+                <MyHotels />
               </Layout>
             }
           />

@@ -1,5 +1,5 @@
 import { API_URL } from "../main";
-import { Hoteltype } from "../../../backend/src/models/hotel.model";
+import { Hoteltype } from "../../../backend/src/shared/types";
 
 const fetchMyHotel = async (): Promise<Hoteltype[]> => {
   try {

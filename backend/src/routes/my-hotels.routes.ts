@@ -1,10 +1,11 @@
 import express, { Request, Response, NextFunction } from "express";
 import multer from "multer";
 import cloudinary from "cloudinary";
-import { Hotel, Hoteltype } from "../models/hotel.model";
+import { Hotel } from "../models/hotel.model";
 import { isAuthenticated } from "../middleware/Auth";
 import { body } from "express-validator";
 import { getMyHotel } from "../controllers/hotel.controller";
+import { Hoteltype } from "../shared/types";
 
 const router = express.Router();
 
