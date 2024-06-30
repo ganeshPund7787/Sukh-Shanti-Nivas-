@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn";
 import ProtectRoute from "./components/ProtectRoute";
 import AddHotel from "./pages/AddHotel";
 import MyHotels from "./pages/MyHotels";
+import UpdateHotel from "./pages/UpdateHotel";
 
 const App = () => {
   return (
@@ -50,6 +51,14 @@ const App = () => {
             element={
               <Layout>
                 <AddHotel />
+              </Layout>
+            }
+          />
+          <Route
+            path="/edit-hotel/:hotelId"
+            element={
+              <Layout>
+                <UpdateHotel />
               </Layout>
             }
           />

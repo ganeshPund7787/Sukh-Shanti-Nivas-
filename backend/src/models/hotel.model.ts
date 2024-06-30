@@ -11,10 +11,10 @@ const hotelSchema = new mongoose.Schema<Hoteltype>(
     type: { type: String, required: true },
     adultCount: { type: Number, required: true },
     childCount: { type: Number, required: true },
-    facilities: [{ type: Array, required: true }],
+    facilities: [{ type: String, required: true }],
     pricePerNight: { type: Number, required: true },
     starRating: { type: Number, required: true, min: 1, max: 5 },
-    imageUrls: [{ type: Array, required: true }],
+    imageUrls: [{ type: String, required: true }],
     lastUpdated: { type: Date, required: true },
   },
   { timestamps: true }

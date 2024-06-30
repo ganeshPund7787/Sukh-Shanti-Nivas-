@@ -7,26 +7,28 @@ const FacilitiesSection = () => {
     register,
     formState: { errors },
   } = useFormContext<HotelFormData>();
+  console.log(hotelFacilities);
+  
   return (
     <div>
       <h1 className="text-2xl font-bold mb-3">Facilities</h1>
       <div className="flex flex-wrap gap-7">
-        {hotelFacilities.map((facality) => (
-          <label key={facality} className="text-sm flex gap-2 text-gray-700">
+        {hotelFacilities.map((facility) => (
+          <label key={facility} className="text-sm flex gap-2 text-gray-700">
             <input
               type="checkbox"
-              value={facality}
+              value={facility}
               {...register("facilities", {
                 validate: (facilities) => {
                   if (facilities && facilities.length > 0) {
                     return true;
                   } else {
-                    return "At least one facilities is required!";
+                    return "At least one facility is required";
                   }
                 },
               })}
             />
-            {facality}
+            {facility}
           </label>
         ))}
       </div>
