@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Hotel } from "../models/hotel.model";
-import { Hoteltype } from "../shared/types";
-import { errorHandler } from "../utils/error.Handler";
+import { HotelSearchResponce } from "../shared/types";
 
 export const getMyHotel = async (
   req: Request,
@@ -32,5 +31,34 @@ export const getMyHotelEdit = async (
   } catch (error) {
     next(error);
     console.log(`Error while updateHotel : `, error);
+  }
+};
+
+export const searchHotels = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const pageSize = 5;
+    const pageNumber = parseInt(
+      req.query.page ? req.query.page.toString() : "1"
+    );
+    const skip = (pageNumber - 1) * pageSize;
+    const hotels = await Hotel.find().skip(skip).limit(pageSize);
+    const total = await Hotel.countDocuments();
+
+    const responce: HotelSearchResponce = {
+      data: hotels,
+      pagination: {
+        total,
+        page: pageNumber,
+        pages: Math.ceil(total / pageSize),
+      },
+    };
+
+    res.status(200).json(responce);
+  } catch (error: any) {
+    next(error.message);
   }
 };
