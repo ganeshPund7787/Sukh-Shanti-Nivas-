@@ -21,7 +21,7 @@ const MyHotels = () => {
         <h1 className="text-3xl font-bold">My Hotels</h1>
         <Link
           to={"/add-hotel"}
-          className="flex bg-purple-600 mx-5 text-white text-xl font-bold p-2 hover:bg-purple-400"
+          className="flex bg-purple-600 mx-5 text-white rounded text-sm font-bold p-2 hover:bg-purple-400"
         >
           Add Hotel
         </Link>
@@ -57,10 +57,10 @@ const MyHotels = () => {
             </div>
             <span className="flex justify-end">
               <Link
-                className="flex bg-purple-600 text-white text-xl font-bold p-2 hover:bg-purple-400"
+                className="flex bg-purple-600 text-white text-sm font-bold p-2 animate-pulse hover:bg-purple-400"
                 to={`/edit-hotel/${hotel._id}`}
               >
-                View Details
+                update
               </Link>
             </span>
           </div>

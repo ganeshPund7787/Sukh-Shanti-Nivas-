@@ -28,6 +28,6 @@ export default {
         },
       },
     ],
-    darkTheme: 'white-theme', // Set the white theme as default
+    darkTheme: 'white-theme', 
   },
 };
