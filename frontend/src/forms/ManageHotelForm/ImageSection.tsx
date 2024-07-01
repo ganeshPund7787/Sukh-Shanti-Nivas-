@@ -32,7 +32,7 @@ const ImageSection = () => {
         {existingImageUrls && (
           <div className="flex gap-5  flex-col md:flex-row">
             {existingImageUrls.map((url) => (
-              <div key={url} className="relative group">
+              <div key={url} className="relative group w-[200px]">
                 <img src={url} alt="" className="object-cover min-h-full" />
                 <button
                   type="button"
@@ -52,7 +52,8 @@ const ImageSection = () => {
           className="w-full text-gray-700 font-normal"
           {...register("imageFiles", {
             validate: (imageFiles) => {
-              const totalLength = imageFiles.length + (existingImageUrls?.length || 0);
+              const totalLength =
+                imageFiles.length + (existingImageUrls?.length || 0);
 
               if (totalLength === 0) {
                 return "At least on img is required";

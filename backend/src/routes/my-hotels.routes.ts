@@ -94,7 +94,7 @@ router.put(
       ];
 
       await hotel.save();
-      res.status(200).json(hotel);
+      res.status(201).json(hotel);
     } catch (error: any) {
       next(error.message);
     }
