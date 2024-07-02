@@ -23,7 +23,6 @@ const SearchHotels = async (
 
   const res = await fetch(`${API_URL}/api/hotels/search?${queryParams}`);
   const data = await res.json();
-  console.log(`Responce : => `, data);
   return data;
 };
 
