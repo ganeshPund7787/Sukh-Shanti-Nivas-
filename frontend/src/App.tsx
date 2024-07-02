@@ -7,6 +7,7 @@ import ProtectRoute from "./components/ProtectRoute";
 import AddHotel from "./pages/AddHotel";
 import MyHotels from "./pages/MyHotels";
 import UpdateHotel from "./pages/UpdateHotel";
+import Search from "./pages/Search";
 
 const App = () => {
   return (
@@ -25,7 +26,7 @@ const App = () => {
           path="/search"
           element={
             <Layout>
-              <span>Search Page</span>
+              <Search />
             </Layout>
           }
         />
