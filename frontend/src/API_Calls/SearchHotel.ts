@@ -8,6 +8,11 @@ export type SearchParams = {
   adultCount?: string;
   childCount?: string;
   page?: string;
+  facilities?: string[];
+  types?: string[];
+  stars?: string[];
+  maxPrice?: string;
+  sortOptions?: string;
 };
 
 const SearchHotels = async (
@@ -21,8 +26,20 @@ const SearchHotels = async (
   queryParams.append("childCount", SearchParams.childCount || "");
   queryParams.append("page", SearchParams.page || "");
 
+  queryParams.append("maxPrice", SearchParams.maxPrice || "");
+  queryParams.append("sortOptions", SearchParams.sortOptions || "");
+
+  SearchParams.facilities?.forEach((facility) =>
+    queryParams.append("facilities", facility)
+  );
+
+  SearchParams.types?.forEach((type) => queryParams.append("types", type));
+  SearchParams.stars?.forEach((star) => queryParams.append("stars", star));
+
   const res = await fetch(`${API_URL}/api/hotels/search?${queryParams}`);
   const data = await res.json();
+
+  
   return data;
 };
 
