@@ -12,7 +12,7 @@ export type SearchParams = {
   types?: string[];
   stars?: string[];
   maxPrice?: string;
-  sortOptions?: string;
+  sortOption?: string;
 };
 
 const SearchHotels = async (
@@ -27,7 +27,7 @@ const SearchHotels = async (
   queryParams.append("page", SearchParams.page || "");
 
   queryParams.append("maxPrice", SearchParams.maxPrice || "");
-  queryParams.append("sortOptions", SearchParams.sortOptions || "");
+  queryParams.append("sortOption", SearchParams.sortOption || "");
 
   SearchParams.facilities?.forEach((facility) =>
     queryParams.append("facilities", facility)
@@ -39,7 +39,6 @@ const SearchHotels = async (
   const res = await fetch(`${API_URL}/api/hotels/search?${queryParams}`);
   const data = await res.json();
 
-  
   return data;
 };
 

@@ -41,7 +41,7 @@ export const searchHotels = async (
 ) => {
   try {
     const query = constructSearchQuery(req.query);
-
+    
     let sortOptions = {};
     switch (req.query.sortOption) {
       case "starRating":
@@ -59,14 +59,14 @@ export const searchHotels = async (
     const pageNumber = parseInt(
       req.query.page ? req.query.page.toString() : "1"
     );
-    
+
     const skip = (pageNumber - 1) * pageSize;
 
     const hotels = await Hotel.find(query)
       .sort(sortOptions)
       .skip(skip)
       .limit(pageSize);
-    
+
     const total = await Hotel.countDocuments(query);
 
     const responce: HotelSearchResponce = {

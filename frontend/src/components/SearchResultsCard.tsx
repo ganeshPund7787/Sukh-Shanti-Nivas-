@@ -20,8 +20,8 @@ const SearchResultsCard = ({ hotel }: Props) => {
         <div className="">
           <div className="flex items-center">
             <span className="flex">
-              {Array.from({ length: hotel.starRating }).map(() => (
-                <AiFillStar className="fill-yellow-400" />
+              {Array.from({ length: hotel.starRating }).map((_, idx) => (
+                <AiFillStar key={idx} className="fill-yellow-400" />
               ))}
             </span>
             <span className="ml-1 text-sm ">{hotel.type}</span>
@@ -41,7 +41,10 @@ const SearchResultsCard = ({ hotel }: Props) => {
         <div className="grid grid-cols-2 items-end whitespace-nowrap">
           <div className="flex gap-1 items-center">
             {hotel.facilities.slice(0, 2).map((facility) => (
-              <span className="text-xs bg-slate-300 p-2 rounded-lg font-bold whitespace-nowrap">
+              <span
+                key={facility}
+                className="text-xs bg-slate-300 p-2 rounded-lg font-bold whitespace-nowrap"
+              >
                 {facility}
               </span>
             ))}
@@ -51,7 +54,9 @@ const SearchResultsCard = ({ hotel }: Props) => {
             </span>
           </div>
           <div className="flex flex-col items-end gap-1">
-            <span className="font-bold">${hotel.pricePerNight} Per night</span>
+            <span className="font-bold">
+              &#8377;{hotel.pricePerNight} Per night
+            </span>
             <Link
               to={`/detail/${hotel._id}`}
               className="bg-purple-500 rounded-lg text-white h-full p-2 max-w-fit font-bold text-sm"

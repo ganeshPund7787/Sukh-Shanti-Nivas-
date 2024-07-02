@@ -10,7 +10,7 @@ const HotelTypesFilter = ({ selectedHotelTypes, onChange }: Props) => {
     <div className="border border-slate-300 pb-5">
       <h4 className="text-md font-semibold mb-2">Hotel Types: </h4>
       {hotelTypes.map((hoteltype) => (
-        <label className="flex items-center space-x-2 mx-2">
+        <label key={hoteltype} className="flex items-center space-x-2 mx-2">
           <input
             type="checkbox"
             className="rounded"
