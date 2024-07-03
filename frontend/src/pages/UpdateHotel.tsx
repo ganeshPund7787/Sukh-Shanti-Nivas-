@@ -7,7 +7,7 @@ import updateHotelById from "../API_Calls/updateHotelById";
 const UpdateHotel = () => {
   const { hotelId } = useParams();
 
-  const { data: hotel, refetch } = useQuery(
+  const { data: hotel } = useQuery(
     "fetchMyHotelById",
     () => fetchMyHotelById(hotelId || ""),
     {

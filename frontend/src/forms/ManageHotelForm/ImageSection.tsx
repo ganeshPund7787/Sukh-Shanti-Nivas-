@@ -30,9 +30,9 @@ const ImageSection = () => {
       <h1 className="text-2xl font-bold mb-3">Images</h1>
       <div className="border rounded p-4 flex flex-col items-center justify-evenly gap-4">
         {existingImageUrls && (
-          <div className="flex gap-5  flex-col md:flex-row">
+          <div className="flex gap-5 flex-col md:flex-row flex-wrap">
             {existingImageUrls.map((url) => (
-              <div key={url} className="relative group w-[200px]">
+              <div key={url} className="relative group w-[250px]">
                 <img src={url} alt="" className="object-cover min-h-full" />
                 <button
                   type="button"

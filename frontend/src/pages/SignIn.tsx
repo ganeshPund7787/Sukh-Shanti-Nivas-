@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { SignInUser } from "../API_Calls/signIn";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 
 export type SignInFormData = {
@@ -17,10 +17,12 @@ const SignIn = () => {
     handleSubmit,
   } = useForm<SignInFormData>();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const mutation = useMutation(SignInUser, {
     onSuccess: async () => {
       await queryClient.invalidateQueries("validateToken");
-      return navigate("/");
+      navigate( location.state?.from?.pathname || "/");
     },
     onError: (err: Error) => {
       console.log(`Error while mutaion login : ${err}`);
