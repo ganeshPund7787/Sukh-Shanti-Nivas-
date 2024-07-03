@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { Hotel } from "../models/hotel.model";
 import { HotelSearchResponce } from "../shared/types";
+import { validationResult } from "express-validator";
+import { errorHandler } from "../utils/error.Handler";
 
 export const getMyHotel = async (
   req: Request,
@@ -41,7 +43,7 @@ export const searchHotels = async (
 ) => {
   try {
     const query = constructSearchQuery(req.query);
-    
+
     let sortOptions = {};
     switch (req.query.sortOption) {
       case "starRating":
@@ -81,6 +83,27 @@ export const searchHotels = async (
     res.status(200).json(responce);
   } catch (error: any) {
     next(error.message);
+  }
+};
+
+export const getHotel = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(errorHandler(200, "something went wrong!"));
+  }
+
+  const id = req.params.id.toString();
+
+  try {
+    const hotel = await Hotel.findById(id);
+    res.json(hotel);
+  } catch (error) {
+    console.log(error);
+    next(error);
   }
 };
 
