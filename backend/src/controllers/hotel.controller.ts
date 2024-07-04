@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Hotel } from "../models/hotel.model";
-import { HotelSearchResponce } from "../shared/types";
+import { BookingType, HotelSearchResponce } from "../shared/types";
 import { validationResult } from "express-validator";
 import { errorHandler } from "../utils/error.Handler";
 import Stripe from "stripe";
@@ -128,7 +128,7 @@ export const readyForPayment = async (
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalCost * 100,
-      currency: "gbp",
+      currency: "INR",
       metadata: {
         hotelId,
         userId: req._id,
@@ -148,6 +148,59 @@ export const readyForPayment = async (
     res.send(response);
   } catch (error: any) {
     next(error);
+  }
+};
+
+export const Bookings = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const paymentIntentId = req.body.paymentIntentId;
+
+    const paymentIntent = await stripe.paymentIntents.retrieve(
+      paymentIntentId as string
+    );
+
+    if (!paymentIntent) {
+      return next(errorHandler(400, "payment intent not found"));
+    }
+
+    if (
+      paymentIntent.metadata.hotelId !== req.params.hotelId ||
+      paymentIntent.metadata.userId !== req._id
+    ) {
+      return next(errorHandler(400, "payment intent mismatch"));
+    }
+
+    if (paymentIntent.status !== "succeeded") {
+      return res.status(400).json({
+        message: `payment intent not succeeded. Status: ${paymentIntent.status}`,
+      });
+    }
+
+    const newBooking: BookingType = {
+      ...req.body,
+      userId: req._id,
+    };
+
+    const hotel = await Hotel.findOneAndUpdate(
+      { _id: req.params.hotelId },
+      {
+        $push: { bookings: newBooking },
+      }
+    );
+
+    if (!hotel) {
+      return next(errorHandler(400, "hotel not found"));
+    }
+
+    await hotel.save();
+    res.status(200).send();
+  } catch (error) {
+    console.log(error);
+    return next(errorHandler(400, "something went wrong"));
   }
 };
 

@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  Bookings,
   getHotel,
   readyForPayment,
   searchHotels,
@@ -21,5 +22,7 @@ router.post(
   isAuthenticated,
   readyForPayment
 );
+
+router.post("/:hotelId/bookings", isAuthenticated, Bookings);
 
 export default router;
