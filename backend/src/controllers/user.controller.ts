@@ -66,7 +66,7 @@ export const userLogin = async (
     if (!isUserExist) return next(errorHandler(400, "User is not exist"));
 
     const validPassword = bcryptjs.compareSync(password, isUserExist.password);
-    
+
     if (!validPassword) {
       return next(errorHandler(401, "incorrect email & password"));
     }
@@ -100,5 +100,24 @@ export const logOutUser = (req: Request, res: Response, next: NextFunction) => {
       .json({ success: true, message: "User logout successfully" });
   } catch (error) {
     next(error);
+  }
+};
+
+export const getUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const userId = req._id;
+
+  try {
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return next(errorHandler(400, "User not found"));
+    }
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    next(errorHandler(500, "something went wrong"));
   }
 };

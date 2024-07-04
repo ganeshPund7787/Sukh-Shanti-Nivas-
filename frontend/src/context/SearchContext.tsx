@@ -52,7 +52,7 @@ export const SearchContextProvider = ({
     parseInt(sessionStorage.getItem("childCount") || "1")
   );
   const [hotelId, setHotelId] = useState<string>(
-    () => sessionStorage.getItem("hotelId") || ""
+    () => sessionStorage.getItem("hotelID") || ""
   );
 
   const saveSearchValues = (
