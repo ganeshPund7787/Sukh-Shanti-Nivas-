@@ -3,6 +3,9 @@ import { Hotel } from "../models/hotel.model";
 import { HotelSearchResponce } from "../shared/types";
 import { validationResult } from "express-validator";
 import { errorHandler } from "../utils/error.Handler";
+import Stripe from "stripe";
+
+const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
 
 export const getMyHotel = async (
   req: Request,
@@ -103,6 +106,47 @@ export const getHotel = async (
     res.json(hotel);
   } catch (error) {
     console.log(error);
+    next(error);
+  }
+};
+
+export const readyForPayment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { numberOfNights } = req.body;
+    const hotelId = req.params.hotelId;
+
+    const hotel = await Hotel.findById(hotelId);
+    if (!hotel) {
+      return next(errorHandler(400, "Hotel not found"));
+    }
+
+    const totalCost = hotel.pricePerNight * numberOfNights;
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: totalCost * 100,
+      currency: "gbp",
+      metadata: {
+        hotelId,
+        userId: req._id,
+      },
+    });
+
+    if (!paymentIntent.client_secret) {
+      return next(errorHandler(500, "Error creating payment intent"));
+    }
+
+    const response = {
+      paymentIntentId: paymentIntent.id,
+      clientSecret: paymentIntent.client_secret.toString(),
+      totalCost,
+    };
+
+    res.send(response);
+  } catch (error: any) {
     next(error);
   }
 };

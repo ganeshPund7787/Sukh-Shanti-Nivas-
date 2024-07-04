@@ -1,6 +1,11 @@
 import express from "express";
-import { getHotel, searchHotels } from "../controllers/hotel.controller";
+import {
+  getHotel,
+  readyForPayment,
+  searchHotels,
+} from "../controllers/hotel.controller";
 import { param } from "express-validator";
+import { isAuthenticated } from "../middleware/Auth";
 
 const router = express.Router();
 
@@ -10,5 +15,11 @@ router.get("/:id", [
   param("id").notEmpty().withMessage("Hotel ID is required"),
   getHotel,
 ]);
+
+router.post(
+  "/:hotelId/bookings/payment-intent",
+  isAuthenticated,
+  readyForPayment
+);
 
 export default router;

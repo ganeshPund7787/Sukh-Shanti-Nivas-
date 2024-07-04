@@ -9,6 +9,7 @@ import MyHotels from "./pages/MyHotels";
 import UpdateHotel from "./pages/UpdateHotel";
 import Search from "./pages/Search";
 import Detail from "./pages/Detail";
+import Booking from "./pages/Booking";
 
 const App = () => {
   return (
@@ -56,6 +57,14 @@ const App = () => {
           }
         />
         <Route element={<ProtectRoute />}>
+          <Route
+            path="/hotel/:hotelId/booking"
+            element={
+              <Layout>
+                <Booking />
+              </Layout>
+            }
+          />
           <Route
             path="/add-hotel"
             element={
