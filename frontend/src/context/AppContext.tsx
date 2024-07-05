@@ -14,12 +14,12 @@ type ToastMessage = {
 type AppContext = {
   showToast: (toastMessage: ToastMessage) => void;
   isLoggedIn: boolean;
-  stripePrice: Promise<Stripe | null>
+  stripePromise: Promise<Stripe | null>;
 };
 
 const AppContext = createContext<AppContext | undefined>(undefined);
 
-const stripePrice = loadStripe(STRIPE_PUB_KEY);
+const stripePromise = loadStripe(STRIPE_PUB_KEY);
 
 export const AppContextProvider = ({
   children,
@@ -39,7 +39,7 @@ export const AppContextProvider = ({
           }
         },
         isLoggedIn: !isError,
-        stripePrice,
+        stripePromise,
       }}
     >
       {children}
