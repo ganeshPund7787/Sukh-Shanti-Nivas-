@@ -1,10 +1,11 @@
 import { PaymentIntentResponse } from "../../../backend/src/shared/types";
 import { API_URL } from "../main";
 
-const createPaymentIntent = async(
+const createPaymentIntent = async (
   hotelId: string,
   numberOfNights: string
 ): Promise<PaymentIntentResponse> => {
+  console.log("Working on create payamentIntent");
   const response = await fetch(
     `${API_URL}/api/hotels/${hotelId}/bookings/payment-intent`,
     {
@@ -20,8 +21,8 @@ const createPaymentIntent = async(
   if (!response.ok) {
     throw new Error("Error fetching payment intent");
   }
-
-  return response.json();
+  const data = await response.json();
+  return data;
 };
 
 export default createPaymentIntent;

@@ -158,7 +158,7 @@ export const Bookings = async (
 ) => {
   try {
     const paymentIntentId = req.body.paymentIntentId;
-
+    console.log("paymentIntentId");
     const paymentIntent = await stripe.paymentIntents.retrieve(
       paymentIntentId as string
     );
@@ -192,12 +192,14 @@ export const Bookings = async (
       }
     );
 
+    console.log(hotel);
+
     if (!hotel) {
       return next(errorHandler(400, "hotel not found"));
     }
 
     await hotel.save();
-    res.status(200).send();
+    res.status(200).send(hotel);
   } catch (error) {
     console.log(error);
     return next(errorHandler(400, "something went wrong"));
