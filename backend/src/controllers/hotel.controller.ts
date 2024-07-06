@@ -204,6 +204,20 @@ export const Bookings = async (
   }
 };
 
+export const getAllhotels = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const hotels = await Hotel.find().sort("-lastUpdated");
+
+    return res.status(200).json(hotels);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const constructSearchQuery = (queryParams: any) => {
   let constructedQuery: any = {};
 

@@ -1,6 +1,7 @@
 import express from "express";
 import {
   Bookings,
+  getAllhotels,
   getHotel,
   readyForPayment,
   searchHotels,
@@ -16,6 +17,8 @@ router.get("/:id", [
   param("id").notEmpty().withMessage("Hotel ID is required"),
   getHotel,
 ]);
+
+router.get("/", getAllhotels);
 
 router.post(
   "/:hotelId/bookings/payment-intent",
