@@ -11,13 +11,13 @@ type ToastMessage = {
   type: "SUCCESS" | "ERROR";
 };
 
-type AppContext = {
+type AppContextType = {
   showToast: (toastMessage: ToastMessage) => void;
   isLoggedIn: boolean;
   stripePromise: Promise<Stripe | null>;
 };
 
-const AppContext = createContext<AppContext | undefined>(undefined);
+const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const stripePromise = loadStripe(STRIPE_PUB_KEY);
 
@@ -48,5 +48,5 @@ export const AppContextProvider = ({
 };
 
 export const useAppContext = () => {
-  return useContext(AppContext) as AppContext;
+  return useContext(AppContext) as AppContextType;
 };

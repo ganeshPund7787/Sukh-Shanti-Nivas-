@@ -158,20 +158,20 @@ export const Bookings = async (
 ) => {
   try {
     const paymentIntentId = req.body.paymentIntentId;
-    console.log("paymentIntentId");
+
     const paymentIntent = await stripe.paymentIntents.retrieve(
       paymentIntentId as string
     );
 
     if (!paymentIntent) {
-      return next(errorHandler(400, "payment intent not found"));
+      return res.status(400).json({ message: "payment intent not found" });
     }
 
     if (
       paymentIntent.metadata.hotelId !== req.params.hotelId ||
       paymentIntent.metadata.userId !== req._id
     ) {
-      return next(errorHandler(400, "payment intent mismatch"));
+      return res.status(400).json({ message: "payment intent mismatch" });
     }
 
     if (paymentIntent.status !== "succeeded") {
@@ -192,17 +192,15 @@ export const Bookings = async (
       }
     );
 
-    console.log(hotel);
-
     if (!hotel) {
-      return next(errorHandler(400, "hotel not found"));
+      return res.status(400).json({ message: "hotel not found" });
     }
-
+    console.log("Hotel info:::: ", hotel);
     await hotel.save();
-    res.status(200).send(hotel);
+    res.status(200).send();
   } catch (error) {
     console.log(error);
-    return next(errorHandler(400, "something went wrong"));
+    res.status(500).json({ message: "something went wrong" });
   }
 };
 
