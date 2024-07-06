@@ -10,10 +10,8 @@ import UpdateHotel from "./pages/UpdateHotel";
 import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
-import { useAppContext } from "./context/AppContext";
 
 const App = () => {
-  const { isLoggedIn } = useAppContext();
   return (
     <BrowserRouter>
       <Toaster />
