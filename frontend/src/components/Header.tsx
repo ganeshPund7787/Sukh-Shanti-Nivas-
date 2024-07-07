@@ -2,9 +2,13 @@ import { Link } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 import LogOutBtn from "./LogOut";
 import { IoMdOptions } from "react-icons/io";
+import { useQuery } from "react-query";
+import { fetchCurrentUser } from "../API_Calls/getCurrentUser";
 
 const Header = () => {
   const { isLoggedIn } = useAppContext();
+  const { data: currentUser } = useQuery("fetchCurrentUser", fetchCurrentUser);
+
   return (
     <div className="bg-purple-600 py-4 px-0 md:px-5">
       <div className="container mx-auto px-5 flex justify-between">
@@ -16,12 +20,22 @@ const Header = () => {
           <span className="flex space-x-2 md:block">
             {isLoggedIn ? (
               <div className="flex gap-3">
-                <Link
-                  className="flex items-center text-white py-1 px-3 font-bold hover:bg-purple-400"
-                  to={"/my-hotels"}
-                >
-                  My Hotels
-                </Link>
+                {currentUser?.isOwner ? (
+                  <Link
+                    className="flex items-center text-white py-1 px-3 font-bold hover:bg-purple-400"
+                    to={"/my-hotels"}
+                  >
+                    My Hotels
+                  </Link>
+                ) : (
+                  <Link
+                    className="flex items-center text-white py-1 px-3 font-bold hover:bg-purple-400"
+                    to={"/"}
+                  >
+                    Home
+                  </Link>
+                )}
+
                 <Link
                   className="flex items-center text-white py-1 px-3 font-bold hover:bg-purple-400"
                   to={"/my-Bookings"}
