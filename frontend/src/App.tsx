@@ -11,6 +11,7 @@ import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
 import MyBookings from "./pages/MyBookings";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
           path="/"
           element={
             <Layout>
-              <span>Home Page</span>
+              <Home />
             </Layout>
           }
         />

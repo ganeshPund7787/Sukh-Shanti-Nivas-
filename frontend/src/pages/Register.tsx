@@ -11,6 +11,7 @@ export type RegisterFormData = {
   email: string;
   password: string;
   confirmPassword: string;
+  isOwner: boolean;
 };
 
 const Register = () => {
@@ -118,6 +119,20 @@ const Register = () => {
           <span className="text-red-500">{errors.confirmPassword.message}</span>
         )}
       </label>
+
+      <label
+        htmlFor=""
+        className="text-sm flex items-center gap-2 text-gray-700 flex-1"
+      >
+        <input
+          type="checkbox"
+          defaultChecked={false}
+          {...register("isOwner")}
+          className="h-4 w-4"
+        />
+        For Hotel bussiness ? 
+      </label>
+
       <span className="text-sm">
         Already Register ?{" "}
         <Link to={"/sign-in"} className="text-blue-600 underline">

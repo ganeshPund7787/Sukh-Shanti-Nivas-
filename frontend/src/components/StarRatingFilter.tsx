@@ -5,7 +5,7 @@ type Props = {
 
 const StarRatingFilter = ({ selectedStars, onChange }: Props) => {
   return (
-    <div className="border border-slate-300 pb-5">
+    <div className="border border-slate-300 pb-5 w-40">
       <h4 className="text-md font-semibold mb-2">Property Ratings: </h4>
       {["1", "2", "3", "4", "5"].map((star) => (
         <label key={star} className="flex items-center space-x-2 mx-2">

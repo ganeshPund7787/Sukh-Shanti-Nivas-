@@ -12,15 +12,7 @@ export const registerUser = async (formData: RegisterFormData) => {
       credentials: "include",
       body: JSON.stringify(formData),
     });
-    console.log(res);
     const data = await res.json();
-    console.log(data);
-    // if (!res.ok) {
-    //   const errorMessage =
-    //     data.message[0]?.msg || data.message || "Registration failed";
-    //   toast.error(errorMessage);
-    //   throw new Error(errorMessage);
-    // }
 
     if (!data.success) {
       const errorMessage =

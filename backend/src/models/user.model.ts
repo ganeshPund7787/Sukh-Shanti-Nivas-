@@ -24,6 +24,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
+    isOwner: {
+      type: Boolean,
+      required: true,
+    },
   },
   { timestamps: true }
 );

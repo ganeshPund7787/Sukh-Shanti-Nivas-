@@ -71,8 +71,8 @@ const Search = () => {
   );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-      <div className="rounded-lg border border-slate-300 p-3 sticky h-fit top-10">
+    <div className="flex flex-col lg:flex-row w-full justify-evenly gap-5">
+      <div className="rounded-lg  border mx-10 md:mx-0 md:block border-slate-300 p-3  h-fit top-10">
         <div className="space-y-5">
           <h1 className="text-lg font-semibold border-b border-slate-300 pb-5">
             Filter By:{" "}
@@ -96,7 +96,7 @@ const Search = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col h-fit gap-4">
         <div className="flex justify-between items-center">
           <span className="text-xl font-bold">
             {hotelData?.pagination.total} Hotels Found

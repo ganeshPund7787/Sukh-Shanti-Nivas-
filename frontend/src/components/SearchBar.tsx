@@ -3,7 +3,6 @@ import { useSearchContext } from "../context/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { AiOutlineClear } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
@@ -108,13 +107,6 @@ const SearchBar = () => {
           className="bg-purple-600 text-white h-full p-2 px-2 font-bold text-xl hover:bg-purple-400"
         >
           Search
-        </button>
-        <button
-          type="submit"
-          title="clear"
-          className="w-1/4 flex justify-center rounded-full px-1 hover:animate-bounce text-white h-full p-2 font-bold text-2xl"
-        >
-          <AiOutlineClear />
         </button>
       </div>
     </form>

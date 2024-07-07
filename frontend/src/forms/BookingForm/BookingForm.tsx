@@ -6,7 +6,7 @@ import {
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 import { useSearchContext } from "../../context/SearchContext";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { createRoomBooking } from "../../API_Calls/createRoomBooking";
 import toast from "react-hot-toast";
@@ -32,6 +32,7 @@ export type BookingFormData = {
 const BookingForm = ({ currentUser, paymentIntent }: Props) => {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   const search = useSearchContext();
   const { hotelId } = useParams();
@@ -39,6 +40,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
   const { mutate: bookRoom, isLoading } = useMutation(createRoomBooking, {
     onSuccess: () => {
       toast.success("Hotel Booking success");
+      navigate("/");
     },
     onError: () => {
       toast.error("error Booking hotel");

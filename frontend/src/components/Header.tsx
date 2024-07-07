@@ -6,7 +6,7 @@ import { IoMdOptions } from "react-icons/io";
 const Header = () => {
   const { isLoggedIn } = useAppContext();
   return (
-    <div className="bg-purple-600 py-4 px-5">
+    <div className="bg-purple-600 py-4 px-0 md:px-5">
       <div className="container mx-auto px-5 flex justify-between">
         <span className="text-2xl text-white font-bold tracking-tight">
           <Link to={"/"}>SukhShantiNivas.com</Link>
